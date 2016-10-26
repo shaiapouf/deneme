@@ -19,7 +19,7 @@ public class InfoBox {
 	}
 	public InfoBox(String vikiURL){
 		/*
-		 * wikipedia kaynaðýndaki element pathleri setter methodlara gönderilir
+		 * wikipedia kaynaÃ°Ã½ndaki element pathleri setter methodlara gÃ¶nderilir
 		 */
 		setTitle(vikiURL, "#mw-content-text > table.infobox.vevent > tbody > tr:nth-child(1) > th.summary");
 		setDirector(vikiURL,0);
@@ -32,8 +32,8 @@ public class InfoBox {
 	}
 	public void setDirector(String vikiURL, int index) {
 		/*  
-		 * director pathindeki(path constructordan gönderilen string)
-		 *  element okunur ve director fieldýna atanýr
+		 * director pathindeki(path constructordan gÃ¶nderilen string)
+		 *  element okunur ve director fieldÃ½na atanÃ½r
 		 */
 		try {	
 			Response res = Jsoup.connect(vikiURL).execute();
@@ -43,7 +43,7 @@ public class InfoBox {
 						
 			Element th = elements_th.get(index);
 			if(th.text().equals("Directed by")){					
-				Element td = th.nextElementSibling();//sonraki sibling'i td öðesi oluyor
+				Element td = th.nextElementSibling();//sonraki sibling'i td Ã¶Ã°esi oluyor
 				this.director = td.text();
 			}
 			else{
@@ -65,23 +65,23 @@ public class InfoBox {
 			Response res = Jsoup.connect(vikiURL).execute();
 			String html = res.body();
 			Document doc = Jsoup.parseBodyFragment(html);
-			Elements elements_th = doc.getElementsByTag("th");//tüm th'leri çek
+			Elements elements_th = doc.getElementsByTag("th");//tÃ¼m th'leri Ã§ek
 			
 			Element th = elements_th.get(index);
 			if(th.text().equals("Starring")){//starring th'sini bul
 				
 				Elements elements_td = th.siblingElements();//mevcut th'nin sibling'ini al
-				String html_td = elements_td.outerHtml();//sibling td'nin htmlini çýkar
+				String html_td = elements_td.outerHtml();//sibling td'nin htmlini Ã§Ã½kar
 				Document doc2 = Jsoup.parseBodyFragment(html_td);
-				Elements elements_stars = doc2.select("div.plainlist > ul > li");//td html'inden list öðelerine al
-				if(!elements_stars.isEmpty()){//yapý liste þeklinde ise(liste boþ deðilse)
-					for(Element star : elements_stars ){//list öðelerini gez
+				Elements elements_stars = doc2.select("div.plainlist > ul > li");//td html'inden list Ã¶Ã°elerine al
+				if(!elements_stars.isEmpty()){//yapÃ½ liste Ã¾eklinde ise(liste boÃ¾ deÃ°ilse)
+					for(Element star : elements_stars ){//list Ã¶Ã°elerini gez
 						this.starring.add(star.text());
 					}		
 				}					
 				else {
 					elements_stars = doc2.select("a");
-					for(Element star : elements_stars ){//a öðelerini gez
+					for(Element star : elements_stars ){//a Ã¶Ã°elerini gez
 						this.starring.add(star.text());
 					}	
 				}
@@ -100,7 +100,7 @@ public class InfoBox {
 	}
 	public void setTitle(String vikiURL,String path) {
 		/*
-		 * title pathindeki element okunur ve title fieldýna atanýr
+		 * title pathindeki element okunur ve title fieldÃ½na atanÃ½r
 		 */
 		Response res;
 		try {	
@@ -120,7 +120,7 @@ public class InfoBox {
 	@Override
 	public String toString(){
 		/*
-		 * InfoBox nesnesinin fieldlarýný ekrana bastýran method
+		 * InfoBox nesnesinin fieldlarÃ½nÃ½ ekrana bastÃ½ran method
 		 */
 		String str = "\nDirector: "+this.director+"\nStarring: ";		
 		for(String star : this.starring){
@@ -197,3 +197,6 @@ public class InfoBox {
 	}*/
 
 }
+
+
+// BU BÄ°R BANT KAYDIDIR. YURTTA MCAN DÃœNYADA MCAN CEMÄ°YETÄ°
